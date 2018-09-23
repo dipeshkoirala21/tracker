@@ -1,17 +1,32 @@
 package com.example.dipes.zeronetracker;
 
+import java.util.List;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class APIData {
+
     @SerializedName("id")
-    public Integer id;
+    @Expose
+    private Integer id;
     @SerializedName("name")
-    public Integer name;
+    @Expose
+    private String name;
     @SerializedName("student_id")
-    public Integer student_id;
+    @Expose
+    private String studentId;
+    @SerializedName("route_id")
+    @Expose
+    private Integer routeId;
+    @SerializedName("station_id")
+    @Expose
+    private Integer stationId;
+    @SerializedName("token")
+    @Expose
+    private Object token;
+    @SerializedName("studentCheckinCheckout")
+    @Expose
+    private List<StudentCheckinCheckout> studentCheckinCheckout = null;
 
     public Integer getId() {
         return id;
@@ -21,129 +36,52 @@ public class APIData {
         this.id = id;
     }
 
-    public Integer getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Integer name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getStudent_id() {
-        return student_id;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(Integer student_id) {
-        this.student_id = student_id;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public Integer getRoute_id() {
-        return route_id;
+    public Integer getRouteId() {
+        return routeId;
     }
 
-    public void setRoute_id(Integer route_id) {
-        this.route_id = route_id;
+    public void setRouteId(Integer routeId) {
+        this.routeId = routeId;
     }
 
-    public String getToken() {
+    public Integer getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(Integer stationId) {
+        this.stationId = stationId;
+    }
+
+    public Object getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(Object token) {
         this.token = token;
     }
 
-    public List<CheckinCheckout> getData() {
-        return data;
+    public List<StudentCheckinCheckout> getStudentCheckinCheckout() {
+        return studentCheckinCheckout;
     }
 
-    public void setData(List<CheckinCheckout> data) {
-        this.data = data;
+    public void setStudentCheckinCheckout(List<StudentCheckinCheckout> studentCheckinCheckout) {
+        this.studentCheckinCheckout = studentCheckinCheckout;
     }
 
-    @SerializedName("route_id")
-    public Integer route_id;
-    @SerializedName("token")
-    private  String token;
-
-    @SerializedName("studentCheckinCheckout")
-    public List<CheckinCheckout> data = new ArrayList<>();
-
-
-    public class CheckinCheckout {
-
-
-        @SerializedName("id")
-        public Integer id;
-        @SerializedName("day")
-        public String day;
-        @SerializedName("check_in")
-        public Integer check_in;
-        @SerializedName("check_out")
-        public String check_out;
-
-        @SerializedName("reach_home")
-        public String reach_home;
-        @SerializedName("bus_coming")
-        public String bus_coming;
-        @SerializedName("reach_school")
-        public String reach_school;
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getDay() {
-            return day;
-        }
-
-        public void setDay(String day) {
-            this.day = day;
-        }
-
-        public Integer getCheck_in() {
-            return check_in;
-        }
-
-        public void setCheck_in(Integer check_in) {
-            this.check_in = check_in;
-        }
-
-        public String getCheck_out() {
-            return check_out;
-        }
-
-        public void setCheck_out(String check_out) {
-            this.check_out = check_out;
-        }
-
-        public String getReach_home() {
-            return reach_home;
-        }
-
-        public void setReach_home(String reach_home) {
-            this.reach_home = reach_home;
-        }
-
-        public String getBus_coming() {
-            return bus_coming;
-        }
-
-        public void setBus_coming(String bus_coming) {
-            this.bus_coming = bus_coming;
-        }
-
-        public String getReach_school() {
-            return reach_school;
-        }
-
-        public void setReach_school(String reach_school) {
-            this.reach_school = reach_school;
-        }
-    }
 }
-

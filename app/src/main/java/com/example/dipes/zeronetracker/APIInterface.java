@@ -14,7 +14,8 @@ public interface APIInterface {
     Call<List<APIData>> getJsons();
 
     @GET("all?")
-    Call<List<APIData>> gethistorydetails(@Query("student_id") String student_id, @Query("date") String date);
+    Call<APIData> gethistorydetails(@Query("student_id") String student_id, @Query("date") String date);
+
 
 
 }

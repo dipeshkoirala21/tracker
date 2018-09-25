@@ -25,9 +25,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 public class MainActivity extends AppCompatActivity {
     List<APIData> postList;
     List<StudentCheckinCheckout> checkoutList;
+    String var="";
     private CalendarView mCalendarView;
     TextView tv1,tv2,tv3,tv4;
     @Override
@@ -47,41 +50,45 @@ public class MainActivity extends AppCompatActivity {
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 month = 1+month;
                 Toast.makeText(getApplicationContext(), ""+year+"-"+month+"-"+dayOfMonth,Toast.LENGTH_SHORT).show();
-//                int counter;
-//                if (questionsCount > 0) {
-//                    String questiontext = list.get(counter).getQuestion();
-//                    question.setText(questiontext);
-//                    counter++;
-//                }
 
             }
         });
 
 
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        Call<List<APIData>> call = apiInterface.gethistorydetails("S10-1", "2018-08-01");
-      call.enqueue(new Callback<List<APIData>>() {
-          @Override
-          public void onResponse(Call<List<APIData>> call, Response<List<APIData>> response) {
-              Log.d("TAG",response.code()+"");
-              List<APIData> postList = response.body();
-//              ArrayList<JSONObject> postList = new ArrayList<JSONObject>();
-//              JSONArray jArray = (JSONArray) APIData;
-//              if (postList != null) {
-//                  for (int i=0;i<jArray.length();i++){
-//                      postList.add(jArray.getString(i));
-//                  }
-//              }
-
-          }
+        Call<APIData> call = apiInterface.gethistorydetails("S10-1", "2018-08-01");
+    call.enqueue(new Callback<APIData>() {
+        @Override
+        public void onResponse(Call<APIData> call, Response<APIData> response) {
+            Log.d("TAG",response.code()+"gj");
+            Log.d("TAG",response.body().getStudentCheckinCheckout().size()+"gjgj");
+            List<StudentCheckinCheckout> postList= new ArrayList<>();
 
 
 
+//            APIData responseBody=response.body();
 
-          @Override
-          public void onFailure(Call<List<APIData>> call, Throwable t) {
-              Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-          }
-      });
-    }
-}
+            String [] data = new String[postList.size()];
+
+
+            for(int i=0; i<postList.size(); i++) {
+                System.out.println(postList.get(i).toString());
+                data[i] = postList.get(i).getCheckIn();
+                data[i+1] = postList.get(i).getBusComing();
+                data[i+2] = postList.get(i).getReachSchool();
+                data[i+3] = postList.get(i).getReachHome();
+//                Log.d("TAG",response.code()+var);
+            }
+
+        }
+
+        @Override
+        public void onFailure(Call<APIData> call, Throwable t) {
+            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+    });
+
+
+
+}}
